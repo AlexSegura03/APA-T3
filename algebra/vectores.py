@@ -1,8 +1,27 @@
 """
-    Tercera tarea de APA - manejo de vectores
+Tercera tarea de APA - manejo de vectores
 
-    Nombre y apellidos: Alex Segura Medina
+Nombre y apellidos: Alex Segura Medina
+
+TESTS UNITARIOS:
+>>> v1 = Vector([1, 2, 3])
+>>> v2 = Vector([4, 5, 6])
+>>> v1 * 2
+Vector([2, 4, 6])
+>>> v1 * v2
+Vector([4, 10, 18])
+>>> v1 @ v2
+32
+>>> v1 = Vector([2, 1 ,2])
+>>> v2 = Vector([0.5, 1, 0.5])
+>>> v1 // v2
+Vector([1.0, 2.0, 1.0])
+>>> v1 % v2
+Vector([1.0, -1.0, 1.0])
 """
+
+
+
 
 class Vector:
     """
@@ -123,3 +142,7 @@ class Vector:
     
     __rmod__ = __mod__
 
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
