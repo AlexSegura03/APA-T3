@@ -84,4 +84,42 @@ class Vector:
         """
 
         return -self + other
+    
+    # Muliplicación de los elementos de dos vectores (Hadamard) o de un vector por un escalar
+    def __mul__(self, other):
+        """
+        Multiplica el vector por otro vector o un escalar.
+        """
+        if isinstance(other, (int, float, complex)):
+            return Vector(uno * other for uno in self)
+        else:
+            return Vector(uno * otro for uno, otro in zip(self, other))
+    __rmul__ = __mul__
+    
+    def __matmul__(self, other):
+        """
+        Producto escalar de dos vectores.
+        """
+        return sum(uno * otro for uno, otro in zip(self, other))
+    __rmall__ = __matmul__
+
+    # Obtención de lsas componentes normal y paralela de un vector respecto a otro
+    
+    def __floordiv__(self, other):
+        """
+        Devuelve la componente paralela de v1 respecto a v2.
+        """
+        # v1 // v2 = (v1 . v2 / |v2|^2) * v2
+        return (self @ other / (other @ other)) * other
+        
+    __rfloordiv__ = __floordiv__
+       
+    def __mod__(self, other):
+        """
+        Devuelve la componente normal de v1 respecto a v2.
+        """
+        # v1 % v2 = v1 - (v1 // v2)
+        return self - (self // other)
+    
+    __rmod__ = __mod__
 
