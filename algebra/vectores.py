@@ -108,6 +108,13 @@ class Vector:
     def __mul__(self, other):
         """
         Multiplica el vector por otro vector o un escalar.
+        
+        >>> v1 = Vector([1, 2, 3])
+        >>> v2 = Vector([4, 5, 6])
+        >>> v1 * 2
+        Vector([2, 4, 6])
+        >>> v1 * v2
+        Vector([4, 10, 18])
         """
         if isinstance(other, (int, float, complex)):
             return Vector(uno * other for uno in self)
@@ -118,6 +125,11 @@ class Vector:
     def __matmul__(self, other):
         """
         Producto escalar de dos vectores.
+
+        >>> v1 = Vector([1, 2, 3])
+        >>> v2 = Vector([4, 5, 6])
+        >>> v1 @ v2
+        32
         """
         return sum(uno * otro for uno, otro in zip(self, other))
     __rmall__ = __matmul__
@@ -127,6 +139,11 @@ class Vector:
     def __floordiv__(self, other):
         """
         Devuelve la componente paralela de v1 respecto a v2.
+
+        >>> v1 = Vector([2, 1 ,2])
+        >>> v2 = Vector([0.5, 1, 0.5])
+        >>> v1 // v2
+        Vector([1.0, 2.0, 1.0])
         """
         # v1 // v2 = (v1 . v2 / |v2|^2) * v2
         return (self @ other / (other @ other)) * other
@@ -136,6 +153,11 @@ class Vector:
     def __mod__(self, other):
         """
         Devuelve la componente normal de v1 respecto a v2.
+
+        >>> v1 = Vector([2, 1 ,2])
+        >>> v2 = Vector([0.5, 1, 0.5])
+        >>> v1 % v2
+        Vector([1.0, -1.0, 1.0])
         """
         # v1 % v2 = v1 - (v1 // v2)
         return self - (self // other)
